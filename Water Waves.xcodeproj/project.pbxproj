@@ -205,6 +205,9 @@
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = Veari;
 				TargetAttributes = {
+					9142A2A2192F5C0600CA16CE = {
+						DevelopmentTeam = JEJU4Q6849;
+					};
 					9142A2C3192F5C0600CA16CE = {
 						TestTargetID = 9142A2A2192F5C0600CA16CE;
 					};
@@ -383,6 +386,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Water Waves/Water Waves-Prefix.pch";
 				INFOPLIST_FILE = "Water Waves/Water Waves-Info.plist";
@@ -397,6 +401,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Water Waves/Water Waves-Prefix.pch";
 				INFOPLIST_FILE = "Water Waves/Water Waves-Info.plist";

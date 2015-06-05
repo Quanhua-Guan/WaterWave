@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5023" systemVersion="13A603" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="vXZ-lx-hvc">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--class Prefix:identifier View Controller-->
+        <!--View Controller-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
                 <viewController id="vXZ-lx-hvc" customClass="VWWViewController" sceneMemberID="viewController">
@@ -15,11 +17,131 @@
                     <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="V8v-pD-GcT" customClass="VWWWaterView">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="waveColor">
+                                        <color key="value" red="1" green="0.7882353663444519" blue="0.48235297203063965" alpha="0.45000000000000001" colorSpace="deviceRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="waveHeight">
+                                        <real key="value" value="200"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="waveAmplitude">
+                                        <real key="value" value="20"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="waveCycle">
+                                        <real key="value" value="500"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="waveAmplitudeRange">
+                                        <real key="value" value="15"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="waveUpdateTimeinterval">
+                                        <real key="value" value="0.074999999999999997"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="waveMoveSpeed">
+                                        <real key="value" value="0.025000000000000001"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fxf-HB-M41" customClass="VWWWaterView">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="waveColor">
+                                        <color key="value" red="0.031372550870000002" green="0.80000007149999997" blue="0.99215692280000001" alpha="0.45000000000000001" colorSpace="deviceRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="waveHeight">
+                                        <real key="value" value="200"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="waveAmplitude">
+                                        <real key="value" value="20"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="waveCycle">
+                                        <real key="value" value="900"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="waveAmplitudeRange">
+                                        <real key="value" value="30"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="waveUpdateTimeinterval">
+                                        <real key="value" value="0.074999999999999997"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="waveMoveSpeed">
+                                        <real key="value" value="0.025000000000000001"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AXq-o2-QiX" customClass="VWWWaterView">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <subviews>
+                                    <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.074999999999999997" minValue="0.0" maxValue="0.10000000000000001" continuous="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EJ4-cM-Eoe">
+                                        <rect key="frame" x="6" y="34" width="308" height="31"/>
+                                        <connections>
+                                            <action selector="changeWaveUpdateTimeinterval:" destination="vXZ-lx-hvc" eventType="valueChanged" id="B4y-K6-EkM"/>
+                                        </connections>
+                                    </slider>
+                                    <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.025000000000000001" minValue="0.0" maxValue="1" continuous="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y31-sm-qZT">
+                                        <rect key="frame" x="6" y="110" width="308" height="31"/>
+                                        <connections>
+                                            <action selector="changeWaveMoveSpeed:" destination="vXZ-lx-hvc" eventType="valueChanged" id="19N-7w-jfA"/>
+                                        </connections>
+                                    </slider>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="EJ4-cM-Eoe" firstAttribute="top" secondItem="AXq-o2-QiX" secondAttribute="top" constant="34" id="55g-sd-vsV"/>
+                                    <constraint firstItem="Y31-sm-qZT" firstAttribute="leading" secondItem="AXq-o2-QiX" secondAttribute="leading" constant="8" id="AHQ-97-the"/>
+                                    <constraint firstAttribute="trailing" secondItem="EJ4-cM-Eoe" secondAttribute="trailing" constant="8" id="Iwk-Ji-Rr5"/>
+                                    <constraint firstItem="Y31-sm-qZT" firstAttribute="top" secondItem="EJ4-cM-Eoe" secondAttribute="bottom" constant="46" id="fBY-Pg-iyb"/>
+                                    <constraint firstItem="EJ4-cM-Eoe" firstAttribute="leading" secondItem="AXq-o2-QiX" secondAttribute="leading" constant="8" id="k9b-gb-pfX"/>
+                                    <constraint firstAttribute="trailing" secondItem="Y31-sm-qZT" secondAttribute="trailing" constant="8" id="ph0-me-lFp"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="waveColor">
+                                        <color key="value" red="0.9960784912109375" green="0.86666673421859741" blue="0.88627457618713379" alpha="0.42999999999999999" colorSpace="deviceRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="waveHeight">
+                                        <real key="value" value="200"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="waveAmplitude">
+                                        <real key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="waveCycle">
+                                        <real key="value" value="300"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="waveAmplitudeRange">
+                                        <real key="value" value="50"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="waveUpdateTimeinterval">
+                                        <real key="value" value="0.074999999999999997"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="waveMoveSpeed">
+                                        <real key="value" value="0.025000000000000001"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="0.9960784912109375" green="0.9960784912109375" blue="0.96862751245498657" alpha="1" colorSpace="deviceRGB"/>
+                        <constraints>
+                            <constraint firstItem="AXq-o2-QiX" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="-16" id="1rc-D7-e0J"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="AXq-o2-QiX" secondAttribute="trailing" constant="-16" id="7i8-g7-QNV"/>
+                            <constraint firstItem="V8v-pD-GcT" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="topMargin" id="GMF-C3-568"/>
+                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="AXq-o2-QiX" secondAttribute="bottom" id="Gik-hH-cyq"/>
+                            <constraint firstItem="AXq-o2-QiX" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="topMargin" id="SVZ-Ug-dmP"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="V8v-pD-GcT" secondAttribute="trailing" constant="-16" id="VXs-fE-SQC"/>
+                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="fxf-HB-M41" secondAttribute="bottom" id="Xyu-dH-j54"/>
+                            <constraint firstItem="fxf-HB-M41" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="topMargin" id="YKN-g1-sfj"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="fxf-HB-M41" secondAttribute="trailing" constant="-16" id="gEG-wi-N6e"/>
+                            <constraint firstItem="fxf-HB-M41" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="-16" id="jWH-ef-y1B"/>
+                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="V8v-pD-GcT" secondAttribute="bottom" id="tXK-lN-aYA"/>
+                            <constraint firstItem="V8v-pD-GcT" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="-16" id="u78-u1-Atf"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="510" y="514"/>
         </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

@@ -19,15 +19,28 @@
 {
     [super viewDidLoad];
     
-    VWWWaterView *waterView = [[VWWWaterView alloc]initWithFrame:self.view.bounds];
-    
-    [self.view addSubview:waterView];
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (IBAction)changeWaveUpdateTimeinterval:(UISlider *)sender {
+    for (UIView *view in self.view.subviews) {
+        if ([view isKindOfClass:[VWWWaterView class]]) {
+            ((VWWWaterView *)view).waveUpdateTimeinterval = sender.value;
+        }
+    }
+}
+
+- (IBAction)changeWaveMoveSpeed:(UISlider *)sender {
+    for (UIView *view in self.view.subviews) {
+        if ([view isKindOfClass:[VWWWaterView class]]) {
+            ((VWWWaterView *)view).waveMoveSpeed = sender.value;
+        }
+    }
 }
 
 @end

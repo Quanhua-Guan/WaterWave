@@ -10,20 +10,15 @@
 
 @interface VWWWaterView ()
 {
-    UIColor *_currentWaterColor;
-    
-    float _currentLinePointY;
-    
-    float a;
-    float b;
-    
-    BOOL jia;
+    CGFloat waveAmplitudeAdjustValue;
+    CGFloat xAxisShift;
+    BOOL shouldAddWaveAmplitudeAdjustValue;
+    NSTimer *waveUpdateTimer;
 }
 @end
 
 
 @implementation VWWWaterView
-
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -32,73 +27,101 @@
         
         [self setBackgroundColor:[UIColor clearColor]];
         
-        a = 1.5;
-        b = 0;
-        jia = NO;
+        waveAmplitudeAdjustValue = 1.5;
+        xAxisShift = 0;
+        shouldAddWaveAmplitudeAdjustValue = NO;
         
-        _currentWaterColor = [UIColor colorWithRed:86/255.0f green:202/255.0f blue:139/255.0f alpha:1];
-        _currentLinePointY = 250;
+        _waveColor = [UIColor colorWithRed:86/255.0f green:202/255.0f blue:139/255.0f alpha:1];
+        _waveHeight = 250;
+        _waveAmplitude = 5.0f;
+        _waveAmplitudeRange = 1.5;
+        _waveCycle = 300;
+        _waveUpdateTimeinterval = 0.075;
+        _waveMoveSpeed = 0.025;
         
-        [NSTimer scheduledTimerWithTimeInterval:0.02 target:self selector:@selector(animateWave) userInfo:nil repeats:YES];
-        
+        [self setUp];
     }
     return self;
 }
 
+- (void)setUp {
+    waveUpdateTimer = [NSTimer scheduledTimerWithTimeInterval:_waveUpdateTimeinterval target:self selector:@selector(animateWave) userInfo:nil repeats:YES];
+}
+
 -(void)animateWave
 {
-    if (jia) {
-        a += 0.01;
+    if (shouldAddWaveAmplitudeAdjustValue) {
+        waveAmplitudeAdjustValue += 0.01;
     }else{
-        a -= 0.01;
+        waveAmplitudeAdjustValue -= 0.01;
     }
     
-    
-    if (a<=1) {
-        jia = YES;
+    if (waveAmplitudeAdjustValue <= -_waveAmplitudeRange) {
+        shouldAddWaveAmplitudeAdjustValue = YES;
     }
     
-    if (a>=1.5) {
-        jia = NO;
+    if (waveAmplitudeAdjustValue >= _waveAmplitudeRange) {
+        shouldAddWaveAmplitudeAdjustValue = NO;
     }
     
-    
-    b+=0.1;
+    xAxisShift += _waveMoveSpeed;
+    if (xAxisShift >= _waveCycle) {
+        xAxisShift = 0;
+    }
     
     [self setNeedsDisplay];
 }
 
+- (void)setWaveUpdateTimeinterval:(CGFloat)waveUpdateTimeinterval {
+    _waveUpdateTimeinterval = waveUpdateTimeinterval;
+    [waveUpdateTimer invalidate];
+    [self setUp];
+}
+
+#if TARGET_INTERFACE_BUILDER
+- (void)willMoveToSuperview:(UIView *)newSuperview {
+    [super willMoveToSuperview: newSuperview];
+    
+    [self setUp];
+}
+#else
+- (void)awakeFromNib {
+    [super awakeFromNib];
+    
+    [self setUp];
+}
+#endif
 
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.
 - (void)drawRect:(CGRect)rect
 {
-    
     CGContextRef context = UIGraphicsGetCurrentContext();
     CGMutablePathRef path = CGPathCreateMutable();
     
     //画水
     CGContextSetLineWidth(context, 1);
-    CGContextSetFillColorWithColor(context, [_currentWaterColor CGColor]);
+    CGContextSetFillColorWithColor(context, [_waveColor CGColor]);
     
-    float y=_currentLinePointY;
+    CGFloat y = _waveHeight;
     CGPathMoveToPoint(path, NULL, 0, y);
-    for(float x=0;x<=320;x++){
-        y= a * sin( x/180*M_PI + 4*b/M_PI ) * 5 + _currentLinePointY;
-        CGPathAddLineToPoint(path, nil, x, y);
+    
+    CGFloat z = (_waveAmplitude + waveAmplitudeAdjustValue);
+    CGFloat a = (2 * M_PI / _waveCycle);
+    CGFloat h = (rect.size.height - _waveHeight);
+    for(CGFloat x = 0; x <= rect.size.width; x++){
+        y = z * sinf(a * x + xAxisShift) + h;
+        CGPathAddLineToPoint(path, NULL, x, y);
     }
     
-    CGPathAddLineToPoint(path, nil, 320, rect.size.height);
-    CGPathAddLineToPoint(path, nil, 0, rect.size.height);
-    CGPathAddLineToPoint(path, nil, 0, _currentLinePointY);
+    CGPathAddLineToPoint(path, NULL, rect.size.width, rect.size.height);
+    CGPathAddLineToPoint(path, NULL, 0, rect.size.height);
+    CGPathAddLineToPoint(path, NULL, 0, rect.size.height - _waveHeight);
     
     CGContextAddPath(context, path);
     CGContextFillPath(context);
-    CGContextDrawPath(context, kCGPathStroke);
-    CGPathRelease(path);
-
     
+    CGPathRelease(path);
 }
-
 
 @end
